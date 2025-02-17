@@ -1,0 +1,205 @@
+.dashboard-comp {
+
+    .mainboard {
+
+        .sdash-1 {
+          padding: 20px;
+          max-height: calc(100vh - 50px );
+          overflow-y: auto;
+          // overflow: hidden;
+          * {
+            color: #000;
+          }
+
+          h1 {
+            
+          }
+
+          .overview-content {
+              padding: 10px;
+              background: #fff;
+              background: linear-gradient(150deg, #c6b538, #fffbc147 ,#79afff);
+              background-size: 200% 200%;
+              background-position: 100% 0%;
+              width: 20vw;
+              height: 450px;
+              position: relative;
+              overflow: hidden;
+              // box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
+              @media (max-width:1366px) {
+                width: 25vw;
+              }
+
+              &::after {
+                  position: absolute;
+                  width: 20vw;
+                  height: 20vw;
+                  content: '';
+                  filter: blur(10px);
+                  background: #79afff;
+                  border-radius: 50%;
+                  bottom: -25%;
+                  right: -25%;
+                  z-index: -2;
+              }
+          }
+
+            .dataglobal-content {
+                padding: 10px;
+                // background: linear-gradient(150deg, #d1c251, #ffffff47, #2079ffa9);
+                background-size: 200% 200%;
+                background-position: 100% 0%;
+                width: 20vw;
+                height: 450px;
+                // box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.35);
+                @media (max-width:1366px) {
+                  width: 25vw;
+                }
+                h1 {
+                    height: 30px;
+                }
+
+                .act-data-1 {
+                    // box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
+                    height: calc(50% - 30px - 0px);
+                    width: 100%;
+                    background: #fff;
+                    background: linear-gradient(150deg, #c6b538, #fffbc147, #609efba9);
+                    background-size: 200% 200%;
+                    background-position: 100% 0%;
+                    &::after {
+                        position: absolute;
+                        width: 12.5vw;
+                        height: 12.5vw;
+                        content: '';
+                        filter: blur(10px);
+                        background: #79afff;
+                        border-radius: 50%;
+                        bottom: -25%;
+                        right: -25%;
+                        z-index: -2;
+                    }
+                }
+
+            }
+
+            .act-data-1 {
+                margin: 20px 0px;
+                display: flex;
+                backdrop-filter: blur(10px);
+                align-items: center;
+                justify-content: center;
+                padding: 10px;
+                position: relative;
+                overflow: hidden;
+                z-index: 2;
+            }
+
+            .simple-bar-chart, .engagement-chart, .modern-pie-chart {
+                width: 100%;
+                height: 100%;
+                display: grid;
+                gap: 5px;
+            }
+            .line-layout {
+                width: 100%;
+                height: 100%;
+            }
+
+
+            .employee-content {
+                width: 20vw;
+                background: linear-gradient(-45deg, #f8f2bf, #fffbc147, #609efba9);
+                height: 450px;
+                padding: 10px;
+                position: relative;
+                overflow: hidden;
+
+                @media (max-width:1366px) {
+                    width: 50vw;
+                }
+                &::after {
+                    position: absolute;
+                    width: 25vw;
+                    height: 25vw;
+                    content: '';
+                    filter: blur(10px);
+                    background: linear-gradient(90deg, #94c4ff, #1875ff);
+                    border-radius: 50%;
+                    bottom: -50%;
+                    left: -50%;
+                    z-index: -2;
+                }
+            }
+
+
+            .data-2 {
+                margin: 20px 0;
+                background: linear-gradient(-45deg, #f8f2bf, #fffbc147, #609efba9);
+                height: 400px;
+                padding: 10px;
+                position: relative;
+                overflow: hidden;
+              
+                &::after {
+                  position: absolute;
+                  width: 50vw;
+                  height: 50vw;
+                  content: '';
+                  filter: blur(10px);
+                  background: linear-gradient(90deg, #94c4ff, #1875ff);
+                  border-radius: 50%;
+                  bottom: -50%;
+                  right: -25%;
+                  z-index: -2;
+                }
+              
+                .recent-list {
+                  width: 100%;
+                  overflow-x: auto;
+                  overflow-y: auto;
+              
+                  table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    background-color: rgba(255, 255, 255, 0.8);
+                    border-radius: 8px;
+                    overflow: hidden;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+              
+                    thead {
+                      background-color: rgba(0, 0, 0, 0.05);
+              
+                      th {
+                        padding: 12px 15px;
+                        text-align: left;
+                        font-weight: 600;
+                        font-size: 0.9rem;
+                      }
+                    }
+              
+                    tbody {
+                      tr {
+                        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                        transition: background-color 0.3s ease;
+              
+                        &:hover {
+                          background-color: rgba(0, 0, 0, 0.05);
+                        }
+              
+                        td {
+                          padding: 12px 15px;
+                          font-size: 0.9rem;
+                        }
+                      }
+                    }
+                  }
+                }
+            }
+              
+
+        }
+
+    }
+
+}
