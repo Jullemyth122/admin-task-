@@ -7,6 +7,7 @@ import DashboardChart from './chart/DashboardChart'
 import EngagementChart from './chart/EngagementChart'
 import ModernPieChart from './chart/ModernPieChart'
 import AccountActivity from './dashboardactivity/AccountActivity'
+import TeamManager from './dashboardactivity/TeamManager'
 
 const Sidebar = () => {
     
@@ -96,7 +97,10 @@ const MainDash = () => {
 
                     <div className="employee-content bg-amber-200">
                         <h1> Team Manager </h1>
-
+                            
+                        <div className="list-team">
+                            <TeamManager/>
+                        </div>
                         
                     </div>
                 </div>

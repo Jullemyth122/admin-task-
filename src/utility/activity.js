@@ -16,4 +16,30 @@ const fetchUserBoards = async () => {
     }
 };
 
-export { fetchUserBoards };
+const fetchUserAccs = async() => {
+    try {
+        const querySnapshot = await getDocs(collection(db,'account'));
+        const accs =  querySnapshot.docs.map((doc) => ({
+            id:doc.id,
+            ...doc.data()
+        }))
+        return accs
+    } catch (error) {
+        console.error("Error fetching Accounts:", error);
+    }
+}
+
+const fetchManagerAccs = async() => {
+    try {
+        const querySnapshot = await getDocs(collection(db,'manager'));
+        const managers =  querySnapshot.docs.map((doc) => ({
+            id:doc.id,
+            ...doc.data()
+        }))
+        return managers
+    } catch (error) {
+        console.error("Error fetching Accounts:", error);
+    }
+}
+
+export { fetchUserBoards, fetchUserAccs, fetchManagerAccs };

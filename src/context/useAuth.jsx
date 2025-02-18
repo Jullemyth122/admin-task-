@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from '../utility/firebase'; // Import providers
 import { saveAdminData } from '../utility/admin';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { fetchManagerAccs } from '../utility/activity';
 
 const AuthContext = createContext();
 
@@ -22,6 +23,9 @@ export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const [managers,setManagers] = useState([])
+    const [accounts,setAccounts] = useState([])
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             console.log(user)
@@ -30,6 +34,15 @@ export const AuthProvider = ({ children }) => {
         });
         return unsubscribe;
     }, []);
+
+    useEffect(() => {
+        const fetchManagers = async() => {
+            const managers = await fetchManagerAccs();
+            setManagers(managers)
+        }
+
+        fetchManagers();
+    },[])
 
     const handleLogin = async () => {
         try {
@@ -90,7 +103,10 @@ export const AuthProvider = ({ children }) => {
         currentUser,setCurrentUser,
 
         handleLogin,
-        handleRegister
+        handleRegister,
+
+        accounts, setAccounts,
+        managers, setManagers
     };
 
     return (
