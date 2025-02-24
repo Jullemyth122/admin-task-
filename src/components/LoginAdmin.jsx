@@ -34,42 +34,54 @@ const LoginAdmin = () => {
         const maxX = containerWidth - circWidth - initLeft;
 
         Draggable.create(circ, {
-        type: 'x',
-        bounds: container,
-        onDrag: function () {
+            type: 'x',
+            bounds: container,
+            onDrag: function () {
 
-            const progress = gsap.utils.clamp(0, 1, this.x / maxX);
+                const progress = gsap.utils.clamp(0, 1, this.x / maxX);
 
-            gsap.to(gradient, { width: progress * 100 + '%', duration: 0.1, ease: 'linear' });
+                gsap.to(gradient, { width: progress * 100 + '%', duration: 0.1, ease: 'linear' });
 
-            gsap.to(btn, { backgroundPosition: `${progress * 100}% center`, duration: 0.1, ease: 'linear' });
-        },
-        onDragEnd: function () {
-            const progress = gsap.utils.clamp(0, 1, this.x / maxX);
-            if (progress > 0.5) {
-                gsap.to(circ, { x: maxX, duration: 0.3, ease: 'power2.out' });
-                gsap.to(gradient, { width: '100%', duration: 0.3, ease: 'power2.out' });
-                gsap.to(btn, { 
-                    backgroundPosition: `100% center`, 
-                    duration: 0.3, 
-                    ease: 'power2.out',
-                    onComplete: async() => {
-                        await handleLogin();
-                        gsap.to(circ, { x: 0, duration: 0.3, ease: 'power2.out' });
-                        gsap.to(gradient, { width: '0%', duration: 0.3, ease: 'power2.out' });
-                        gsap.to(btn, { backgroundPosition: `0% center`, duration: 0.3, ease: 'power2.out',
-                            onComplete:() => {
-                                navigate('/dashboard')
+                gsap.to(btn, { backgroundPosition: `${progress * 100}% center`, duration: 0.1, ease: 'linear' });
+            },
+            onDragEnd: function () {
+                const progress = gsap.utils.clamp(0, 1, this.x / maxX);
+                if (progress > 0.5) {
+                    gsap.to(circ, { x: maxX, duration: 0.3, ease: 'power2.out' });
+                    gsap.to(gradient, { width: '100%', duration: 0.3, ease: 'power2.out' });
+                    gsap.to(btn, { 
+                        backgroundPosition: `100% center`, 
+                        duration: 0.3, 
+                        ease: 'power2.out',
+                        // onComplete: async() => {
+                        //     await handleLogin();
+                        //     gsap.to(circ, { x: 0, duration: 0.3, ease: 'power2.out' });
+                        //     gsap.to(gradient, { width: '0%', duration: 0.3, ease: 'power2.out' });
+                        //     gsap.to(btn, { backgroundPosition: `0% center`, duration: 0.3, ease: 'power2.out',
+                        //         onComplete:() => {
+                        //             navigate('/dashboard')
+                        //         }
+                        //     });                
+                        // }
+                        onComplete: async () => {
+                            const loginSuccess = await handleLogin();
+                            if (loginSuccess) {
+                                navigate('/dashboard');
+                            } else {
+                                // Optionally, you can reset the slider here if login failed
+                                gsap.to(circ, { x: 0, duration: 0.3, ease: 'power2.out' });
+                                gsap.to(gradient, { width: '0%', duration: 0.3, ease: 'power2.out' });
+                                gsap.to(btn, { backgroundPosition: `0% center`, duration: 0.3, ease: 'power2.out' });
                             }
-                        });                
-                    }
-                });
-            } else {
-                gsap.to(circ, { x: 0, duration: 0.3, ease: 'power2.out' });
-                gsap.to(gradient, { width: '0%', duration: 0.3, ease: 'power2.out' });
-                gsap.to(btn, { backgroundPosition: `0% center`, duration: 0.3, ease: 'power2.out' });
+                        }
+                        
+                    });
+                } else {
+                    gsap.to(circ, { x: 0, duration: 0.3, ease: 'power2.out' });
+                    gsap.to(gradient, { width: '0%', duration: 0.3, ease: 'power2.out' });
+                    gsap.to(btn, { backgroundPosition: `0% center`, duration: 0.3, ease: 'power2.out' });
+                }
             }
-        }
         });
     }, [handleLogin]);
     

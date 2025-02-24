@@ -42,4 +42,17 @@ const fetchManagerAccs = async() => {
     }
 }
 
-export { fetchUserBoards, fetchUserAccs, fetchManagerAccs };
+const fetchAdminAccs = async() => {
+    try {
+        const querySnapshot = await getDocs(collection(db,'admin'));
+        const admins =  querySnapshot.docs.map((doc) => ({
+            id:doc.id,
+            ...doc.data()
+        }))
+        return admins
+    } catch (error) {
+        console.error("Error fetching Accounts:", error);
+    }
+}
+
+export { fetchUserBoards, fetchUserAccs, fetchManagerAccs, fetchAdminAccs };

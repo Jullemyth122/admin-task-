@@ -7,6 +7,7 @@ import LoginAdmin from './components/LoginAdmin'
 import RegisterAdmin from './components/RegisterAdmin'
 import PublicRoute from './components/PublicRoute'
 import PrivateRoute from './components/PrivateRoute'
+import Accounts from './components/Accounts'
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,14 @@ const router = createBrowserRouter([
       element: (
         <PrivateRoute>
           <Dashboard/>
+        </PrivateRoute>
+      ),
+      errorElement:<Error/>  
+    },{
+      path:'/accounts',
+      element: (
+        <PrivateRoute>
+          <Accounts/>
         </PrivateRoute>
       ),
       errorElement:<Error/>  

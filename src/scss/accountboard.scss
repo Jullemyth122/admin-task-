@@ -1,0 +1,184 @@
+.accounts-comp {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    * {
+        color: #fff;
+    }
+
+    .sidebar {
+        width: 250px;
+
+        .side-comp {
+            width: calc(100%);
+            height: calc(100vh - 60px);
+            background: linear-gradient(to bottom, #d9cc6c96, #8cbaffa8);
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+            padding: 10px;
+
+            a {
+                color: #000;
+            }
+        }
+    }
+
+    .mainboard {
+        width: 100%;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+
+        .acc-user-comp,
+        .acc-manager-comp,
+        .acc-admin-comp {
+            border-radius: 10px;
+            margin: 20px 15px;
+            background: linear-gradient(-45deg, #f8f2bf, #fffbc147, #609efba9);
+            /* height: 450px; */
+            padding: 20px;
+            position: relative;
+            /* overflow: hidden; */
+
+            * {
+                color: #000;
+            }
+
+            .bg-overlay {
+                z-index: -2;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                overflow: hidden;
+                top: 0;
+                left: 0;
+                border-radius: 10px;
+
+                &::after {
+                    position: absolute;
+                    width: 50vw;
+                    height: 50vw;
+                    content: '';
+                    filter: blur(10px);
+                    background: linear-gradient(90deg, #94c4ff, #1875ff);
+                    border-radius: 50%;
+                    bottom: -50%;
+                    right: -25%;
+                    z-index: -2;
+                }
+            }
+
+
+            .dropdown-container {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-calendar {
+                position: absolute;
+                top: calc(100% + 4px);
+                left: 0;
+                background: #fff;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                border-radius: 4px;
+                z-index: 100;
+            }
+
+
+
+            .opt-searching {
+                padding: 10px 0px;
+
+                input {
+                    border-radius: 5px;
+                    outline: none;
+                    background: #ffffffcb;
+                    padding: 5px;
+                    color: #2d2d2d;
+
+                    &::placeholder {
+                        color: #2d2d2d;
+                        padding: 5px;
+                    }
+                }
+            }
+
+            .sub_opt {
+
+                .del,
+                .edit,
+                .date-range-btn {
+                    cursor: pointer;
+                    border-radius: 5px;
+                    background: #ffffffcb;
+                    padding: 10px;
+                    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
+                }
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            .acc-user-lists,
+            .acc-manager-lists,
+            .acc-admin-lists {
+                overflow-x: auto;
+                overflow-y: auto;
+
+                .table-container {
+                    max-height: 30vh; // Set your desired height
+                    overflow-y: auto;
+
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+
+                        thead {
+                            th {
+                                position: sticky;
+                                top: 0;
+                                border-radius: 5px;
+                                background-color: rgba(255, 255, 255, 0.9); // Ensure a solid background
+                                z-index: 1; // So that header stays on top of the tbody rows
+                                padding: 7px 10px;
+                                text-align: left;
+                                font-weight: 600;
+                                font-size: 13px;
+                            }
+                        }
+
+                        tbody {
+                            tr {
+                                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                                transition: background-color 0.3s ease;
+
+                                &:hover {
+                                    background-color: rgba(0, 0, 0, 0.05);
+                                }
+
+                                td {
+                                    padding: 7px 10px;
+                                    font-size: 12px;
+
+                                    input {
+                                        padding: 3.5px;
+                                        border-radius: 5px;
+                                        background: #a19850;
+                                        color: #2d2d2d;
+
+                                        &::placeholder {
+                                            color: #fff;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+
+        }
+    }
+}

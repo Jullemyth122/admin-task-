@@ -1,8 +1,11 @@
 import React from 'react'
 import { useAuth } from '../../context/useAuth';
+import { db } from '../../utility/firebase';
+import { doc, updateDoc } from 'firebase/firestore';
+import CustomCheckbox from './CustomCheckBox';
 const TeamManager = () => {
 
-    const { managers } = useAuth()
+    const { managers, fetchedManagers } = useAuth()
     // const { }
  
     const sortedManagers = managers.slice().sort((a, b) => {
@@ -11,6 +14,22 @@ const TeamManager = () => {
         return dateB - dateA;
     });
 
+    const handleCCM = async (accId, field, currentValue) => {
+        try {
+            const newValue = !currentValue;
+            const accDocRef = doc(db, "manager", accId);
+            const checking = await updateDoc(accDocRef, { [field]: newValue });
+            console.log({[field]: newValue})
+            console.log(accDocRef)
+            console.log(checking)
+            // Refresh the accounts list after updating the document.
+            if (fetchedManagers) fetchedManagers();
+        } catch (error) {
+            console.error("Error updating account field:", error);
+        }
+    };
+
+
     return (
         <>
         <div className="recent-list">
@@ -18,8 +37,7 @@ const TeamManager = () => {
                 <table>
                     <thead>
                     <tr>
-                        <th>Username</th>
-                        <th>Email</th>
+                        <th>Username / Email </th>
                         <th>Created At</th>
                         <th>Approval</th>
                     </tr>
@@ -32,11 +50,18 @@ const TeamManager = () => {
                             : new Date(manager.createdAt);
                         return (
                         <tr key={manager.id}>
-                            <td>{manager.username || '-'}</td>
-                            <td>{manager.email || '-'}</td>
+                            <td>
+                                {manager.username || '-'}
+                                <br/>
+                                {manager.email || '-'}
+                            </td>
                             <td>{managerDate.toLocaleString()}</td>
                             <td>
-                                <input type="checkbox" name="" id="" checked={false} />
+                                <CustomCheckbox
+                                    id={`tagging-${manager.id}`}
+                                    checked={manager.approval}
+                                    onChange={() => handleCCM(manager.id, 'approval', manager.approval)}
+                                />
                             </td>
                         </tr>
                         );
