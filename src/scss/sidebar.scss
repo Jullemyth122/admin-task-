@@ -3,6 +3,13 @@
 
     .side-comp {
 
+
+        svg {
+            path {
+                fill: var(--sidenav-ISO, #fff); // Dark mode icon color
+            }
+        }
+        
         .nav-side {
             // background: orange;
             // margin: 0px 20px;
@@ -39,7 +46,7 @@
         }
 
         h1.admin-txt {
-            color: rgb(40, 93, 226);
+            color: var(--sidenav-Title);
             text-align: center;
             width: 100%;
             font-size: 22px;

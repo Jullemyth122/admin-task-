@@ -7,10 +7,9 @@ const saveAdminData = async (user, username) => {
         // Create a document for the user with their UID in Firestore
         await setDoc(doc(db, "admin", user.uid), {
             approval:false,
-            username: user.displayName || username,  // use user's displayName if available, or fallback to local username
-            email: user.email,
-            uid: user.uid,
-            approval:false,
+            username: user?.displayName || username,  // use user's displayName if available, or fallback to local username
+            email: user?.email,
+            uid: user?.uid,
             createdAt: new Date(), // Optional: Add a timestamp
         });
         console.log("User data saved to Firestore");

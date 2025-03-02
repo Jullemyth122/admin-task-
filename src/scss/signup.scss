@@ -35,6 +35,7 @@
         .ti-h1 {
             clip-path: polygon(0 0, 41.5% 0, 41.5% 100%, 0% 100%);
         }
+
         .ti-h2 {
             color: #8c8022;
             z-index: 2;
@@ -47,13 +48,14 @@
             height: 4px;
             border-radius: 5px;
             box-shadow: 0px 3px 3px #00000062;
-            background: linear-gradient(to right, #fffa6f, #4d89e2);
+            background: linear-gradient(to right, var(--bg-nav-grd-darkLight), var(--bg-nav-grd-darkDark));
         }
     }
 
     .content-banner {
         min-height: calc(100vh - 75px - 200px);
         overflow: hidden;
+
         .outside-show-content {
             height: 100%;
 
@@ -64,119 +66,126 @@
                 position: absolute;
                 z-index: -1;
             }
+
             .elip1 {
                 left: -20%;
                 top: 25%;
-                background: radial-gradient(circle at 0% 0%, #fff, #d1c251);
+                background: radial-gradient(circle at 0% 0%, var(--home-elip1-grd-light), var(--home-elip1-grd-dark));
             }
 
             .elip2 {
                 right: -20%;
                 top: 50%;
-                background: radial-gradient(circle at 100% 0%, #fff, #538fff);
+                background: radial-gradient(circle at 100% 0%, var(--home-elip2-grd-light), var(--home-elip2-grd-dark));
             }
+        }
+
+        .show-content {
+            padding: 20px 20px;
+            border-radius: 10px;
+            z-index: 2;
+            overflow: hidden;
+            // width: 500px;
+            width: 400px;
+            box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
+            background: radial-gradient(circle at 0% 0%, var(--home-showContent-light), var(--home-showContent-dark));
+            height: calc(100vh - 75px - 200px - 0vh);
+            // @media (max-width: 1500px) {
+            //     width: 85vw;
+            // }
+            // .ellipse {
+            //     z-index: 1;
+            // }
+
+            .title {
+                width: 100%;
+
+                h1 {
+                    font-size: 20px;
+                }
             }
-            .show-content {
-                padding: 20px 20px;
-                border-radius: 10px;
-                z-index: 2;
+
+            .input-item {
+                display: grid;
+                margin: 20px 0px;
+
+                input {
+                    background: var(--home-input);
+                    padding: 10px;
+                    border-radius: 7.5pxs;
+                }
+            }
+
+            .error-message {
+                color: rgb(227, 33, 33);
+            }
+
+            .success-message {
+                color: rgb(9, 129, 9);
+            }
+
+            .button-area {
+                width: 80%;
+                align-self: center;
+                justify-self: center;
+                background: var(--home-input);
+                margin: 30px 0;
                 overflow: hidden;
-                // width: 500px;
-                width: 400px;
-                box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
-                background: radial-gradient(circle at 0% 0%, #d1c251, #538fff);
-                height: calc(100vh - 75px - 200px - 0vh);
-                // @media (max-width: 1500px) {
-                //     width: 85vw;
-                // }
-                // .ellipse {
-                //     z-index: 1;
-                // }
+                border-radius: 7.5px;
+                position: relative; // For proper positioning of absolute children
 
-                .title {
-                    width: 100%;
-                    h1 {
-                        font-size: 20px;
-                    }
+                // The gradient overlay (starts hidden)
+                .gradient-bg {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 0; // will be animated to 100%
+                    background: linear-gradient(to right, transparent, white);
+                    z-index: 1;
                 }
 
-                .input-item {
-                    display: grid;
-                    margin: 20px 0px;
-                    input {
-                        background: #ffffffae;
-                        padding: 10px;
-                        border-radius: 7.5pxs;
-                    }
+                // Button with text that uses a gradient fill for the animated text effect
+                button.btn-login {
+                    padding: 10px;
+                    position: relative;
+                    font-weight: 600;
+                    z-index: 2;
+                    background: linear-gradient(90deg, black, red);
+                    background-size: 300%; // makes it possible to shift the gradient
+                    background-position: 0% center;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    border: none;
+                    outline: none;
+                    font-size: 1rem;
+                    cursor: pointer;
                 }
 
-                .error-message {
-                    color: rgb(227, 33, 33);
-                }
-                .success-message {
-                    color: rgb(9, 129, 9);
-                }
 
-                .button-area {
-                    width: 80%;
-                    align-self: center;
-                    justify-self: center;
-                    background: #ffffffbc;
-                    margin: 30px 0;
-                    overflow: hidden;
-                    border-radius: 7.5px;
-                    position: relative; // For proper positioning of absolute children
-                  
-                    // The gradient overlay (starts hidden)
-                    .gradient-bg {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
+                .circ {
+                    left: 7.5%; // starting position
+                    position: absolute;
+                    width: 35px;
+                    height: 35px;
+                    padding: 7.5px; // total effective width ~50px
+                    border-radius: 50%;
+                    background: red;
+                    cursor: pointer;
+                    z-index: 3;
+
+                    svg {
+                        width: 100%;
                         height: 100%;
-                        width: 0; // will be animated to 100%
-                        background: linear-gradient(to right, transparent, white);
-                        z-index: 1;
-                    }
-                  
-                    // Button with text that uses a gradient fill for the animated text effect
-                    button.btn-login {
-                        padding: 10px;
-                        position: relative;
-                        font-weight: 600;
-                        z-index: 2;
-                        background: linear-gradient(90deg, black, red);
-                        background-size: 300%; // makes it possible to shift the gradient
-                        background-position: 0% center;
-                        -webkit-background-clip: text;
-                        -webkit-text-fill-color: transparent;
-                        border: none;
-                        outline: none;
-                        font-size: 1rem;
-                        cursor: pointer;
-                    }
-
-
-                    .circ {
-                        left: 7.5%; // starting position
-                        position: absolute;
-                        width: 35px;
-                        height: 35px;
-                        padding: 7.5px; // total effective width ~50px
-                        border-radius: 50%;
-                        background: red;
-                        cursor: pointer;
-                        z-index: 3;
-                    
-                        svg {
-                            width: 100%;
-                            height: 100%;
-                        }
                     }
                 }
-                .alter-sign {
-                    margin: 12.5px 0;
-                    a {
-                        h1 {
+            }
+
+            .alter-sign {
+                margin: 12.5px 0;
+
+                a {
+                    h1 {
                         position: relative;
                         display: inline-block;
                         padding: 5px;
@@ -196,18 +205,19 @@
                             transform-origin: left;
                             transition: transform 0.3s ease;
                         }
-                        }
+                    }
 
-                        &:hover {
+                    &:hover {
                         h1 {
                             color: #fff; // change text color smoothly
+
                             &::after {
-                            transform: scaleX(1); // animate underline to full width
+                                transform: scaleX(1); // animate underline to full width
                             }
-                        }
                         }
                     }
                 }
             }
+        }
     }
 }

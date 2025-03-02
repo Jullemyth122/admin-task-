@@ -4,7 +4,7 @@ import { auth, db } from '../utility/firebase'; // Import providers
 import { saveAdminData } from '../utility/admin';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { fetchAdminAccs, fetchManagerAccs, fetchUserAccs } from '../utility/activity';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 
 const AuthContext = createContext();
 
@@ -28,6 +28,9 @@ export const AuthProvider = ({ children }) => {
     const [managers,setManagers] = useState([])
     const [accounts,setAccounts] = useState([])
 
+    const [accBST, setAccBST] = useState(null); // holds current user's account document data
+
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
             if (user) {
@@ -41,7 +44,7 @@ export const AuthProvider = ({ children }) => {
             } else {
                 // If not approved (or no admin record), show an error and sign out
                 setErrorMessage("Your account is pending approval. Please contact the administrator.");
-                await auth.signOut();
+                // await auth.signOut();
                 setCurrentUser(null);
             }
             } else {
@@ -51,6 +54,20 @@ export const AuthProvider = ({ children }) => {
         });
         return unsubscribe;
     }, []);
+
+    // Listen for real-time changes to the current user's account document in Firestore.
+    useEffect(() => {
+        if (currentUser) {
+            const accountRef = doc(db, "admin", currentUser.uid);
+            const unsubscribe = onSnapshot(accountRef, (docSnapshot) => {
+                if (docSnapshot.exists()) {
+                    const accountData = docSnapshot.data();
+                    setAccBST(accountData);
+                }
+            });
+            return () => unsubscribe();
+        }
+    }, [currentUser]);
 
     const fetchedManagers = async() => {
         const managers_ = await fetchManagerAccs();
@@ -97,7 +114,10 @@ export const AuthProvider = ({ children }) => {
                 await auth.signOut();
                 return false;
             }
-    
+            
+            setUsername("")
+            setPassword("")
+            setEmail("")
             // If approved, continue with login
             setSuccessMessage("Successfully logged in!");
             localStorage.setItem("admin", JSON.stringify(user));
@@ -118,14 +138,15 @@ export const AuthProvider = ({ children }) => {
             });
     
             await saveAdminData(user, username); 
-            await auth.signOut();
-    
+
+            
             setUsername("")
             setPassword("")
             setEmail("")
             setSuccessMessage("Account has been created wait for pending approval...");  // Success message
             console.log("User signed up:", username, email);
             
+            await auth.signOut();
         } catch (error) {
             console.log(error)
             setErrorMessage(error.message);  // Set error message if any
@@ -142,6 +163,7 @@ export const AuthProvider = ({ children }) => {
         errorMessage, setErrorMessage,
         successMessage, setSuccessMessage,
         currentUser,setCurrentUser,
+        accBST,
 
         handleLogin,
         handleRegister,
