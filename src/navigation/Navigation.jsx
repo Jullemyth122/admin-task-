@@ -31,12 +31,12 @@ const Navigation = () => {
     
         if (currentUser) {
             try {
-            const adminRef = doc(db, "admin", currentUser.uid);
-            // Update only the theme field in Firestore
-            await updateDoc(adminRef, { theme: newTheme });
-            console.log("Theme updated in Firestore:", newTheme);
+                const adminRef = doc(db, "admin", currentUser.uid);
+                // Update only the theme field in Firestore
+                await updateDoc(adminRef, { theme: newTheme });
+                console.log("Theme updated in Firestore:", newTheme);
             } catch (error) {
-            console.error("Error updating theme in Firestore:", error);
+                console.error("Error updating theme in Firestore:", error);
             }
         }
     };
