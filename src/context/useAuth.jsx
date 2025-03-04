@@ -172,7 +172,7 @@ export const AuthProvider = ({ children }) => {
         managers, setManagers,
 
         admins, setAdmins,
-        fetchedManagers,fetchedAdmins
+        fetchedManagers,fetchedAdmins, fetchedUsers
     };
 
     return (

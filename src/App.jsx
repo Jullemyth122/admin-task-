@@ -8,6 +8,8 @@ import RegisterAdmin from './components/RegisterAdmin'
 import PublicRoute from './components/PublicRoute'
 import PrivateRoute from './components/PrivateRoute'
 import Accounts from './components/Accounts'
+import Reports from './components/Reports'
+import Sales from './components/Sales'
 
 const router = createBrowserRouter([
   {
@@ -48,7 +50,26 @@ const router = createBrowserRouter([
         </PublicRoute>
       ),
       errorElement: <Error/>
-    }]
+    }
+    ,{
+      path:'/reports',
+      element:(
+        <PrivateRoute>
+          <Reports/>
+        </PrivateRoute>
+      ),
+      errorElement: <Error/>
+    },
+    ,{
+      path:'/sales',
+      element:(
+        <PrivateRoute>
+          <Sales/>
+        </PrivateRoute>
+      ),
+      errorElement: <Error/>
+    },
+  ]
   }
 ])
 

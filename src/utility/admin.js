@@ -10,6 +10,7 @@ const saveAdminData = async (user, username) => {
             username: user?.displayName || username,  // use user's displayName if available, or fallback to local username
             email: user?.email,
             uid: user?.uid,
+            role:'admin',
             createdAt: new Date(), // Optional: Add a timestamp
         });
         console.log("User data saved to Firestore");

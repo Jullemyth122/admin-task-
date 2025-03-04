@@ -9,10 +9,13 @@
 
       // overflow: hidden;
       * {
-        color: var(--sidenav-ISO);
+        color: #000;
+        /* color: var(--sidenav-ISO); */
       }
 
-      h1 {}
+      h1 {
+        color: var(--sidenav-ISO);
+      }
 
       .overview-content {
         padding: 10px;
@@ -65,6 +68,7 @@
         // }
 
         h1 {
+          color: var(--sidenav-ISO);
           height: 30px;
         }
 
@@ -191,6 +195,7 @@
                   td {
                     padding: 7px 10px;
                     font-size: 12px;
+                    color: var(--sidenav-ISO);
 
                     input {
                       padding: 3.5px;
@@ -377,6 +382,7 @@
                   td {
                     padding: 7px 10px;
                     font-size: 12px;
+                    color: var(--sidenav-ISO);
 
                     input {
                       padding: 3.5px;

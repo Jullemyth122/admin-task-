@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;display=swap');
+
+.reports-comp {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+
+    .sidebar {
+        width: 250px;
+
+        .side-comp {
+            width: 100%;
+            height: calc(100vh - 60px);
+            background: linear-gradient(to bottom, var(--dash-sbar-light), var(--dash-sbar-dark));
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+            padding: 10px;
+
+            a {
+                color: var(--sidenav-ISO);
+            }
+        }
+    }
+
+    .mainboard {
+        width: calc(100% - 250px);
+        padding: 20px;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+
+        .reports-container {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            width: 100%;
+            height: 100vh;
+            border-radius: 10px;
+            /* Background gradient similar to account styling */
+            background: linear-gradient(-45deg, var(--emp-light), var(--emp-gray), var(--emp-dark));
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            padding: 20px;
+
+            .bg-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 150%;
+                height: 150%;
+                z-index: -1;
+                background: linear-gradient(90deg, #94c4ff, #1875ff);
+                opacity: 0.2;
+                filter: blur(10px);
+                transform: rotate(15deg);
+            }
+
+            /* Left Column: Combined Data (Boards & Accounts) */
+            .data-list-section {
+                width: 60%;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                background: var(--home-input);
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+                .boards-panel,
+                .accounts-panel {
+                    background: var(--home-input);
+                    border-radius: 10px;
+                    padding: 20px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
+
+                .boards-panel {
+                    h2 {
+                        margin-bottom: 20px;
+                        font-size: 1.25rem;
+                    }
+
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        background-color: transparent;
+
+                        th,
+                        td {
+                            border: 1px solid var(--text-color);
+                            padding: 8px;
+                            text-align: left;
+                            font-size: 0.9rem;
+                        }
+
+                        th {
+                            background-color: var(--tb-h);
+                            position: sticky;
+                            top: 0;
+                        }
+                    }
+                }
+
+                .accounts-panel {
+                    h2 {
+                        margin-bottom: 20px;
+                        font-size: 1.25rem;
+                    }
+
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        background: transparent;
+
+                        th,
+                        td {
+                            border: 1px solid var(--text-color);
+                            padding: 8px;
+                            text-align: left;
+                            font-size: 0.9rem;
+                        }
+
+                        th {
+                            background-color: var(--tb-h);
+                            position: sticky;
+                            top: 0;
+                        }
+                    }
+                }
+            }
+
+            /* Right Column: Calendar */
+            .calendar-section {
+                width: 40%;
+                background: linear-gradient(-45deg, var(--emp-light), var(--emp-gray), var(--emp-dark));
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+                .year-navigation {
+                    text-align: center;
+                    margin-bottom: 15px;
+
+                    button {
+                        margin: 0 10px;
+                        padding: 5px 10px;
+                        background-color: var(--bs-bg-light);
+                        color: var(--text-color);
+                        border: none;
+                        cursor: pointer;
+                        border-radius: 5px;
+                        transition: background-color 0.3s;
+
+                        &:hover {
+                            background-color: var(--bs-hdl-bg);
+                        }
+                    }
+
+                    span {
+                        font-weight: bold;
+                        font-size: 1rem;
+                    }
+                }
+
+                .calendar-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    overflow-y: auto;
+                    max-height: calc(100vh - 180px);
+                }
+
+                .month-row {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    margin-bottom: 10px;
+                }
+
+                .month-label-vertical {
+                    width: 80px;
+                    text-align: right;
+                    font-size: 1rem;
+                    font-weight: 600;
+                }
+
+                .month-grid {
+                    display: grid;
+                    grid-template-columns: repeat(7, 20px);
+                    gap: 20px 20px;
+                }
+            }
+        }
+    }
+}
+
+/* Day cell styling */
+.day-cell {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: outline 0.2s;
+    color: #4f96ff98;
+
+    &:hover {
+        outline: 1px solid var(--text-color);
+    }
+
+    &.empty {
+        background-color: transparent;
+        cursor: default;
+    }
+}
